@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Platform, PermissionsAndroid } from 'react-native';
 import Voice from '@react-native-voice/voice';
-import Userarea from './userarea';
+import Userinput from './input';
 import Tts from 'react-native-tts';
 
 const Voiceinput = () => {
@@ -76,7 +76,7 @@ const Voiceinput = () => {
     }
 
     return (
-        <Userarea 
+        <Userinput 
         result={result} 
         setResult={setResult} 
         isRecording={isRecording} 

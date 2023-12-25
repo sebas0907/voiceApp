@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, ScrollView, StyleSheet, Image, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView, StyleSheet, Image, SafeAreaView, Alert } from 'react-native';
 import axios from 'axios';
 import Tts from 'react-native-tts';
 import {BASE_URL, OPENAI_API_KEY} from '@env';
 
-const Userarea = (props) => {
+const Userinput = (props) => {
 
     const [messages, setMessages] = useState([]);
 
@@ -17,9 +17,9 @@ const Userarea = (props) => {
     };
 
     const data = {
-      "model": "gpt-3.5-turbo",
+      "model": "gpt-4-1106-preview",//"gpt-3.5-turbo",
       "messages": [{"role": "user", "content": `${props.result}`}],
-      "temperature": 0.7
+      "temperature": 1.0 // 0.7 works just well
     };
 
     const query = {
@@ -36,7 +36,10 @@ const Userarea = (props) => {
               const res = response.data.choices[0].message.content;
               setMessages([...messages, {text: props.result, sender: 'user'}, {text: res, sender: 'chatgpt'}]); 
               voiceHandler(res);
-            });    
+            }).catch((err)=>{
+              console.log(err);
+              Alert.alert("Error!",err, [{text:"OK"}]);
+            }); 
           };
     };
 
@@ -132,7 +135,7 @@ const Userarea = (props) => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#FFF5E0',
+      backgroundColor: '#202020',//#FFF5E0
     },
     messagesContainer: {
       padding: 10,
@@ -152,23 +155,23 @@ const Userarea = (props) => {
       alignItems: 'center',
       padding: 10,
       borderTopWidth: 1,
-      borderColor: '#ccc',
-      backgroundColor: 'white',
+      borderColor: '#202020',//#ccc
+      backgroundColor: '#202020',//white
     },
     languageContainer: {
       flex: 1,
       alignSelf: 'flex-end',
       alignItems: 'center',
       padding: 10,
-      backgroundColor: '#FFF5E0',
+      backgroundColor: '#202020',//#FFF5E0
     },
     input: {
       flex: 1,
       fontSize: 16,
       padding: 10,
       borderRadius: 20,
-      color: "black",
-      backgroundColor: '#EFEFEF',//
+      color: "white", //black
+      backgroundColor: '#808080',//#EFEFEF
     },
     voiceButton: {
       marginLeft: 10,
@@ -205,4 +208,4 @@ const Userarea = (props) => {
     },     
   });
   
-  export default Userarea;
+  export default Userinput;

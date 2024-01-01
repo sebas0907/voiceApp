@@ -1,0 +1,15 @@
+deploy:android:
+    stage: deploy
+    tags:
+        - rnbuild
+    before_script:
+        - yarn install
+    script:
+        - cd android && ./gradlew assembleRelease
+        - cp android/app/build/outputs/apk/app-release.apk $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.apk
+    artifacts:
+        name: "$CI_PROJECT_NAME-$PLATFORM-$CI_COMMIT_REF_NAME"
+        paths:
+            - $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.apk
+        expire_in: 7 days
+    when: manual

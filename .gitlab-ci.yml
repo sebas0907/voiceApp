@@ -19,7 +19,10 @@ build project:
     - chmod +x ./android/gradlew
     - yarn build # is the scripts defined in your package.json as "cd android #&& ./gradlew assembleRelease"
     - yarn install --pure-lockfile --cache-folder .yarn
+    - cp android/app/build/outputs/apk/app-release.apk $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.apk
     
   artifacts:
+    name: "$CI_PROJECT_NAME-$PLATFORM-$CI_COMMIT_REF_NAME"
     paths:
-      - android/app/build/outputs/apk/release/app-release.apk
+      - $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.apk
+    expire_in: 7 days

@@ -10,7 +10,7 @@ const Voiceinput = () => {
     const [error, setError] = useState("");
     const [isRecording, setIsRecording] = useState(false);
     const [recordingMode, setRecordingMode] = useState(false);
-    const [languages, setLanguages] = useState(['en-US','es-es','de-de','fr-fr','it-it']);
+    const [languages, setLanguages] = useState(['en-US','es-es','de-de','fr-fr','it-it','sl-sl']);
     const [language, setLanguage] = useState("en-US");
 
     useEffect(() => {
@@ -72,7 +72,9 @@ const Voiceinput = () => {
         const lang = langs.shift();
         langs.push(lang);
         setLanguage(lang);
-        Tts.setDefaultLanguage(lang);
+        if (lang=="sl-sl"  ) {
+            Tts.setDefaultLanguage('hr-hr');
+        } else {Tts.setDefaultLanguage(lang);}        
     }
 
     return (

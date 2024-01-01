@@ -40,6 +40,8 @@ const Userinput = (props) => {
               console.log(err);
               Alert.alert("Error!",err, [{text:"OK"}]);
             }); 
+        //setMessages([...messages, {text: props.result, sender: 'user'}, {text: props.result, sender: 'chatgpt'}]); 
+        //voiceHandler(props.result);
           };
     };
 

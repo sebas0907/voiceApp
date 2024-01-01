@@ -1,3 +1,6 @@
+stages:
+    - "deploy"
+
 deploy:android:
     stage: deploy
     tags:

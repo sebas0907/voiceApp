@@ -15,4 +15,3 @@ deploy:android:
         paths:
             - $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.apk
         expire_in: 7 days
-    when: manual

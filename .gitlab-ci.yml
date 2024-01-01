@@ -3,8 +3,6 @@ stages:
 
 deploy:android:
     stage: deploy
-    tags:
-        - build
     before_script:
         - yarn install
     script:

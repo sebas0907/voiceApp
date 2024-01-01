@@ -5,7 +5,6 @@ stages:
 
 deploy:android:
     stage: deploy
-    image: npm:latest
     before_script:
         - npm install
     script:

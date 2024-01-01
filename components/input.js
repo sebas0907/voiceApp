@@ -17,7 +17,7 @@ const Userinput = (props) => {
     };
 
     const data = {
-      "model": "gpt-4-1106-preview",//"gpt-3.5-turbo",
+      "model": "gpt-3.5-turbo",//"gpt-4-1106-preview"
       "messages": [{"role": "user", "content": `${props.result}`}],
       "temperature": 1.0 // 0.7 works just well
     };
@@ -32,7 +32,7 @@ const Userinput = (props) => {
         
         props.setResult('');
         
-        axios.post(URL, data , {headers: headers}).then((response) => {
+        axios.post(URL, data, {headers: headers}).then((response) => {
               const res = response.data.choices[0].message.content;
               setMessages([...messages, {text: props.result, sender: 'user'}, {text: res, sender: 'chatgpt'}]); 
               voiceHandler(res);

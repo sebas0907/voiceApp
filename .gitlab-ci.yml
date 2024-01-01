@@ -16,6 +16,7 @@ build project:
       - node_modules
     policy: pull #`pull` the jobs pull the cache at the beginning but do not push the changes again.
   script:
+    - chmod +x ./gradlew
     - yarn build # is the scripts defined in your package.json as "cd android #&& ./gradlew assembleRelease"
     - yarn install --pure-lockfile --cache-folder .yarn
     

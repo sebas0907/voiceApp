@@ -1,17 +1,24 @@
-image: node:latest
+
+before_script:
+  - yarn install --frozen-lockfile #--frozen-lockfile to make sure we will have the same packages version
 
 stages:
-    - "deploy"
+  - build
 
-deploy:android:
-    stage: deploy
-    before_script:
-        - npm install
-    script:
-        - cd android &&  chmod +x ./gradlew assembleRelease
-        - cp android/app/build/outputs/apk/app-release.apk $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.apk
-    artifacts:
-        name: "$CI_PROJECT_NAME-$PLATFORM-$CI_COMMIT_REF_NAME"
-        paths:
-            - $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.apk
-        expire_in: 7 days
+build project:
+  stage: build
+  image: reactnativecommunity/react-native-android
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
+    policy: pull #`pull` the jobs pull the cache at the beginning but do not push the changes again.
+  script:
+    - yarn build:apk # is the scripts defined in your package.json as "cd android #&& ./gradlew assembleRelease"
+    - yarn install --pure-lockfile --cache-folder .yarn
+    
+  artifacts:
+    paths:
+      - android/app/build/outputs/apk/release/app-release.apk

@@ -5,6 +5,7 @@ deploy:android:
     stage: deploy
     before_script:
         - echo "PATH='${PATH}'"
+        - export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v14.11.0/bin"
         - npm install
     script:
         - cd android && ./gradlew assembleRelease

@@ -4,6 +4,7 @@ stages:
 deploy:android:
     stage: deploy
     before_script:
+        - echo "PATH='${PATH}'"
         - npm install
     script:
         - cd android && ./gradlew assembleRelease

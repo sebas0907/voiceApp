@@ -17,7 +17,7 @@ const Userinput = (props) => {
     };
 
     const data = {
-      "model": "gpt-3.5-turbo",//"gpt-4-1106-preview"
+      "model": "gpt-4-1106-preview",//"gpt-3.5-turbo"
       "messages": [{"role": "user", "content": `${props.result}`}],
       "temperature": 1.0 // 0.7 works just well
     };
@@ -40,8 +40,6 @@ const Userinput = (props) => {
               console.log(err);
               Alert.alert("Error!",err, [{text:"OK"}]);
             }); 
-        //setMessages([...messages, {text: props.result, sender: 'user'}, {text: props.result, sender: 'chatgpt'}]); 
-        //voiceHandler(props.result);
           };
     };
 
